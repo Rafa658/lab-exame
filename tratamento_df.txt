@@ -1,0 +1,18 @@
+df = df.drop(['Unnamed: 0.1', 'Unnamed: 0'], axis=1)
+df = df.drop(['user_id'], axis=1)
+df = df.drop(['city', 'state'], axis=1)
+df = df.drop(['Language'], axis=1)
+df = df.drop(['isbn', 'img_l'], axis=1)
+df['age'] = df['age'].astype(int)
+df['year_of_publication'] = df['year_of_publication'].astype(int)
+
+X_train = df.drop(['rating'], axis = 1)
+Y_train = df['rating']
+
+le = preprocessing.LabelEncoder()
+for column_name in X_train.columns:
+    if X_train[column_name].dtype == object:
+        X_train[column_name] = le.fit_transform(X_train[column_name])
+    else:
+        pass
+X_train
